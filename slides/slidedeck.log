@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.1.20)  12 MAR 2026 10:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.1.20)  12 MAR 2026 11:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -832,7 +832,7 @@ File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mat
 <plot_02_class_distribution.png, id=47, 965.5272pt x 298.2342pt>
 File: plot_02_class_distribution.png Graphic file (type png)
 <use plot_02_class_distribution.png>
-Package pdftex.def Info: plot_02_class_distribution.png  used on input line 78.
+Package pdftex.def Info: plot_02_class_distribution.png  used on input line 77.
 (pdftex.def)             Requested size: 219.08743pt x 67.66862pt.
 
 
@@ -842,7 +842,7 @@ Package pdftex.def Info: plot_02_class_distribution.png  used on input line 78.
 <plot_01_missingness.png, id=60, 859.5312pt x 280.4076pt>
 File: plot_01_missingness.png Graphic file (type png)
 <use plot_01_missingness.png>
-Package pdftex.def Info: plot_01_missingness.png  used on input line 103.
+Package pdftex.def Info: plot_01_missingness.png  used on input line 101.
 (pdftex.def)             Requested size: 219.08743pt x 71.47089pt.
 
 
@@ -852,102 +852,125 @@ Package pdftex.def Info: plot_01_missingness.png  used on input line 103.
 <plot_03_income_misrepresentation.png, id=67, 931.8012pt x 279.9258pt>
 File: plot_03_income_misrepresentation.png Graphic file (type png)
 <use plot_03_income_misrepresentation.png>
-Package pdftex.def Info: plot_03_income_misrepresentation.png  used on input line 129.
+Package pdftex.def Info: plot_03_income_misrepresentation.png  used on input line 127.
 (pdftex.def)             Requested size: 219.08743pt x 65.81674pt.
 
 
 [5
 
  <./plot_03_income_misrepresentation.png>]
+<plot_07_loan_to_income.png, id=76, 931.8012pt x 280.4076pt>
+File: plot_07_loan_to_income.png Graphic file (type png)
+<use plot_07_loan_to_income.png>
+Package pdftex.def Info: plot_07_loan_to_income.png  used on input line 153.
+(pdftex.def)             Requested size: 219.08743pt x 65.93002pt.
+
 
 [6
 
-]
-<plot_threshold.png, id=82, 642.7212pt x 279.9258pt>
-File: plot_threshold.png Graphic file (type png)
-<use plot_threshold.png>
-Package pdftex.def Info: plot_threshold.png  used on input line 158.
-(pdftex.def)             Requested size: 219.08743pt x 95.41698pt.
-
+ <./plot_07_loan_to_income.png>]
 
 [7
 
- <./plot_threshold.png>]
-<plot_shap_importance.png, id=90, 642.7212pt x 424.4658pt>
-File: plot_shap_importance.png Graphic file (type png)
-<use plot_shap_importance.png>
-Package pdftex.def Info: plot_shap_importance.png  used on input line 183.
-(pdftex.def)             Requested size: 219.08743pt x 144.68564pt.
+]
+<plot_threshold.png, id=90, 642.7212pt x 279.9258pt>
+File: plot_threshold.png Graphic file (type png)
+<use plot_threshold.png>
+Package pdftex.def Info: plot_threshold.png  used on input line 192.
+(pdftex.def)             Requested size: 219.08743pt x 95.41698pt.
 
 
 [8
 
- <./plot_shap_importance.png>]
-File: plot_shap_importance.png Graphic file (type png)
-<use plot_shap_importance.png>
-Package pdftex.def Info: plot_shap_importance.png  used on input line 209.
-(pdftex.def)             Requested size: 219.08743pt x 144.68564pt.
+ <./plot_threshold.png>]
+<plot_06_correlations.png, id=100, 810.8694pt x 642.2394pt>
+File: plot_06_correlations.png Graphic file (type png)
+<use plot_06_correlations.png>
+Package pdftex.def Info: plot_06_correlations.png  used on input line 217.
+(pdftex.def)             Requested size: 219.08743pt x 173.52455pt.
 
 
 [9
 
-]
+ <./plot_06_correlations.png>]
+<plot_shap_importance.png, id=107, 642.7212pt x 424.4658pt>
+File: plot_shap_importance.png Graphic file (type png)
+<use plot_shap_importance.png>
+Package pdftex.def Info: plot_shap_importance.png  used on input line 242.
+(pdftex.def)             Requested size: 219.08743pt x 144.68564pt.
+
 
 [10
 
-]
-Overfull \hbox (27.49529pt too wide) in paragraph at lines 248--248
- [] 
- []
-
-<plot_roc_curves.png, id=109, 348.3414pt x 352.1958pt>
-File: plot_roc_curves.png Graphic file (type png)
-<use plot_roc_curves.png>
-Package pdftex.def Info: plot_roc_curves.png  used on input line 248.
-(pdftex.def)             Requested size: 211.11896pt x 213.458pt.
-
-Overfull \vbox (19.52045pt too high) detected at line 248
- []
-
-
+ <./plot_shap_importance.png>]
 
 [11
 
- <./plot_roc_curves.png>]
-<plot_confusion_matrices.png, id=117, 767.0256pt x 286.1892pt>
-File: plot_confusion_matrices.png Graphic file (type png)
-<use plot_confusion_matrices.png>
-Package pdftex.def Info: plot_confusion_matrices.png  used on input line 275.
-(pdftex.def)             Requested size: 219.08743pt x 81.7438pt.
-
+]
 
 [12
 
- <./plot_confusion_matrices.png>]
+]
 
 [13
 
 ]
-<plot_fairness.png, id=132, 932.283pt x 357.4956pt>
-File: plot_fairness.png Graphic file (type png)
-<use plot_fairness.png>
-Package pdftex.def Info: plot_fairness.png  used on input line 309.
-(pdftex.def)             Requested size: 219.08743pt x 84.01147pt.
+Overfull \hbox (27.49529pt too wide) in paragraph at lines 363--363
+ [] 
+ []
 
-Overfull \vbox (37.27974pt too high) detected at line 309
+<plot_roc_curves.png, id=136, 348.3414pt x 352.1958pt>
+File: plot_roc_curves.png Graphic file (type png)
+<use plot_roc_curves.png>
+Package pdftex.def Info: plot_roc_curves.png  used on input line 363.
+(pdftex.def)             Requested size: 211.11896pt x 213.458pt.
+
+Overfull \vbox (19.52045pt too high) detected at line 363
  []
 
 
 
 [14
 
- <./plot_fairness.png>]
+ <./plot_roc_curves.png>]
+<plot_confusion_matrices.png, id=143, 767.0256pt x 286.1892pt>
+File: plot_confusion_matrices.png Graphic file (type png)
+<use plot_confusion_matrices.png>
+Package pdftex.def Info: plot_confusion_matrices.png  used on input line 390.
+(pdftex.def)             Requested size: 219.08743pt x 81.7438pt.
+
 
 [15
 
-]
+ <./plot_confusion_matrices.png>]
 
 [16
+
+]
+Overfull \hbox (21.8571pt too wide) in paragraph at lines 431--431
+[][]  
+ []
+
+<plot_fairness.png, id=156, 932.283pt x 357.4956pt>
+File: plot_fairness.png Graphic file (type png)
+<use plot_fairness.png>
+Package pdftex.def Info: plot_fairness.png  used on input line 431.
+(pdftex.def)             Requested size: 219.08743pt x 84.01147pt.
+
+
+[17
+
+ <./plot_fairness.png>]
+
+[18
+
+]
+
+[19
+
+]
+
+[20
 
 ]
 \tf@nav=\write6
@@ -968,17 +991,17 @@ Package rerunfilecheck Info: File `slidedeck.out' has not changed.
 (rerunfilecheck)             Checksum: 228F71353C9CF8B2956BE34FC92600E3;621.
  ) 
 Here is how much of TeX's memory you used:
- 25575 strings out of 473529
- 518323 string characters out of 5714773
- 864633 words of memory out of 5000000
- 48235 multiletter control sequences out of 15000+600000
- 577216 words of font info for 79 fonts, out of 8000000 for 9000
+ 25609 strings out of 473529
+ 518953 string characters out of 5714773
+ 865633 words of memory out of 5000000
+ 48259 multiletter control sequences out of 15000+600000
+ 578805 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,13n,123p,1911b,756s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0700.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1440.pk><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on slidedeck.pdf (16 pages, 578353 bytes).
+ <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi0800.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx0800.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0700.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1440.pk><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on slidedeck.pdf (20 pages, 913419 bytes).
 PDF statistics:
- 495 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 123 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 641 PDF objects out of 1000 (max. 8388607)
+ 46 named destinations out of 1000 (max. 500000)
+ 133 words of extra memory for PDF output out of 10000 (max. 10000000)
 

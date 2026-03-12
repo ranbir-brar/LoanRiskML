@@ -1,0 +1,318 @@
+TITLE SLIDE
+
+(~15 seconds)
+
+Hey everyone — thanks for taking a few minutes to watch this.
+
+So this project looks at a pretty common problem in lending:
+which loan applicants are likely to default.
+
+The company currently uses a rule-based scoring system. It works, but it's rigid — lots of hand-tuned thresholds and assumptions. My goal here was simple:
+
+Can a data-driven model predict defaults better than those fixed rules?
+
+I'll walk through the data, what signals showed up during exploration, the model itself, how it compares to the existing system, and finally some fairness and deployment questions that come with automating decisions like this.
+
+SLIDE 1 — Target Imbalance & Data Scope
+
+(~50 seconds)
+
+Let’s start with the data itself.
+
+We’re working with about 2,000 loan applications. At first glance the distribution looks pretty typical for lending: roughly 85% of borrowers repay and 15% default.
+
+That imbalance matters a lot.
+
+If I built a model that simply predicted “everyone repays,” it would be right most of the time — about 85% accuracy. Sounds impressive, but it completely fails the real objective, which is identifying risky borrowers.
+
+So accuracy alone doesn’t tell us much here. Instead I focused on metrics that actually punish missed defaults — F1 score and AUC-ROC.
+
+One other wrinkle in the dataset: about 8% of applications are still ongoing. No outcome yet. Those can’t help us train a prediction model because we don’t know if they’ll repay or default.
+
+I checked whether those rows were clustered around certain applicant types or income levels. They weren’t — the distribution looked random — so excluding them introduces very little bias.
+
+So the training set ends up being labeled historical applications only.
+
+SLIDE 2 — Missing Data as a Predictive Signal
+
+(~45 seconds)
+
+Next thing that popped up during exploration was missing data.
+
+About 15% of applicants never submitted documented income.
+
+Now normally the instinct is to clean that up — maybe impute a value and move on.
+
+But when I compared outcomes, something interesting appeared:
+people without documentation default much more often.
+
+So the absence of documentation is actually telling us something.
+
+It’s not just messy data. It’s behavior.
+
+If someone applies for a loan but can’t verify their income, that alone increases risk. Because of that, instead of filling those values in, I treated missing documentation itself as a feature.
+
+Sometimes the most useful signal is exactly what’s not there.
+
+SLIDE 3 — Behaviour Signals Over Raw Values
+
+(~45 seconds)
+
+Another pattern showed up when comparing stated income versus documented income.
+
+If an applicant claims income that’s more than twice what their documents show, the default rate spikes.
+
+Not shocking, right?
+If someone exaggerates their income, repayment becomes less reliable.
+
+Then there’s the relationship between loan size and income.
+
+When the loan stays below about 30% of monthly income, default rates hover around 17%.
+
+But once that threshold is crossed, the default rate jumps dramatically — over 40%.
+
+That tells us something important:
+the absolute income number doesn’t matter as much as how large the loan is relative to it.
+
+The risk sits in the ratio.
+
+SLIDE 4 — Loan Size Relative to Income
+
+(~50 seconds)
+
+This slide makes that ratio effect really clear.
+
+On the bar chart you can see that default rates stay fairly flat below the 30% loan-to-income mark.
+
+But once borrowers stretch past that point, defaults rise quickly.
+
+The scatter plot shows another angle of the same story.
+Applicants with similar incomes behave very differently depending on loan size.
+
+Two people might earn the same salary — but if one borrows a much larger fraction of it, that borrower is far more likely to default.
+
+Because of that pattern, the feature loan_to_income becomes one of the strongest predictors in the model.
+
+Interestingly, this wasn’t something the algorithm invented.
+The exploratory analysis already pointed us there first.
+
+SLIDE 5 — Why XGBoost?
+
+(~55 seconds)
+
+So after exploring the data, the next question becomes: what type of model makes sense here?
+
+I chose XGBoost, mainly for three reasons.
+
+First, the relationships we just saw aren’t linear.
+A small loan might be safe for someone with moderate income, but the same person becomes risky if the loan grows too large.
+
+Tree-based models like XGBoost naturally capture those interactions without heavy manual feature engineering.
+
+Second, the dataset is imbalanced, with far fewer defaults than repayments.
+XGBoost has a built-in parameter called scale_pos_weight that lets us emphasize the minority class without distorting the dataset.
+
+And third, the decision threshold doesn’t have to sit at 0.5.
+I tuned the threshold specifically to maximize F1 on the default class, which ended up around 0.62.
+
+Using five-fold cross-validation, the model achieved an AUC of about 0.68, which is pretty reasonable given the dataset size.
+
+SLIDE 6 — Why the Rule-Based Score Isn't Enough
+
+(~55 seconds)
+
+Before comparing models, it’s useful to look at what signals actually correlate with default.
+
+The correlation matrix here highlights a few strong relationships:
+
+• Overdrafts and missing documentation strongly correlate with default.
+• Bank balance and consistent deposits correlate negatively, meaning they indicate stability.
+
+Those all make intuitive sense.
+
+But here’s the surprising part.
+
+The rule-based score itself barely correlates with actual outcomes.
+
+Why? Because the rule system relies on assumptions — things that seem like good signals.
+
+For example, it penalizes self-employment and rewards high stated income.
+
+But the historical outcomes tell a slightly different story. Some of those rules simply don’t line up with real repayment behavior.
+
+That gap — between intuition and actual data — is exactly what the model tries to close.
+
+SLIDE 7 — What Drives Default Risk?
+
+(~40 seconds)
+
+When we examine feature importance from the trained model, the same patterns show up again.
+
+At the top of the list are:
+
+• loan_to_income
+• withdrawal_ratio
+• overdraft history
+
+Notice something about those features.
+
+They’re mostly behavioral ratios, not raw dollar amounts.
+
+That reinforces what we saw earlier in the exploration phase. Risk is less about how much money someone has, and more about how they manage it relative to their obligations.
+
+Documentation status also lands in the top five features, which again confirms that missing documents carry meaningful information.
+
+SLIDE 8 — Explaining Individual Decisions
+
+(~45 seconds)
+
+Global feature importance is helpful for understanding the model overall.
+
+But lenders and regulators usually ask a different question:
+
+Why was this specific person denied?
+
+So the model also includes a local explanation layer.
+
+For each applicant, it surfaces the exact features driving the prediction and their values.
+
+For example, applicant 1185 was flagged with an 80% default probability because:
+
+• no income documentation
+• no bank deposits
+• loan equal to 1.13× monthly income
+
+Those individual factors appear directly in the explanation output.
+
+That creates a clear audit trail for every decision.
+
+SLIDE 9 — What the Metrics Actually Mean
+
+(~55 seconds)
+
+Before comparing models, let’s quickly interpret the metrics.
+
+Precision answers:
+When we flag someone as risky, how often are we correct?
+
+Recall answers:
+Out of all real defaults, how many did we catch?
+
+F1 score balances those two.
+
+Then there’s AUC-ROC, which measures how well the model separates repayers from defaulters across all thresholds.
+
+Two additional metrics matter a lot in lending:
+
+False Positive Rate – good borrowers denied.
+False Negative Rate – actual defaults that slip through.
+
+Those two errors have very different financial consequences.
+
+Missing a default means losing the full loan amount.
+Denying a good applicant usually costs only acquisition expenses and lost business.
+
+Because those costs aren’t equal, the threshold shouldn’t automatically sit at 0.5.
+
+SLIDE 10 — XGBoost vs Rule-Based Baseline
+
+(~50 seconds)
+
+Now let’s compare the two systems.
+
+The most important improvement is false negative rate.
+
+The rule-based system misses about 67% of defaults.
+
+The XGBoost model cuts that roughly in half to 33%.
+
+So the model catches twice as many risky borrowers.
+
+At first glance the rule system looks more precise.
+But that’s mostly because it flags very few applicants at all.
+
+If you deny almost nobody, the few denials you make will often be correct — but risky borrowers still slip through.
+
+The ROC curve shows that across most thresholds, the model separates defaulters from repayers more effectively.
+
+SLIDE 11 — The Deploy-Tomorrow Trade-Off
+
+(~45 seconds)
+
+But improvements always come with trade-offs.
+
+For every 368 applications, the model catches about 37 additional defaults compared to the baseline.
+
+That’s a big financial win.
+
+However, it also wrongly denies about 69 more good applicants.
+
+So the false positive rate rises from about 8.5% to 35%.
+
+Is that acceptable?
+
+That depends entirely on business priorities.
+
+If one default costs far more than a missed customer, the trade-off might be worth it. If customer acquisition matters more, the threshold could be adjusted.
+
+The key point is that the threshold becomes a dial, not a fixed rule.
+
+SLIDE 12 — Where the Rule-Based System Fails on Fairness
+
+(~45 seconds)
+
+This brings us to fairness.
+
+When we break results down by employment status, an interesting pattern appears.
+
+Self-employed and employed applicants have almost identical default rates — about 26% each.
+
+Yet the rule-based system approves employed applicants 56% of the time, but self-employed only 35%.
+
+That’s a 21-point approval gap without a real difference in risk.
+
+The model narrows that gap significantly. Approval rates become 79% for employed and 74% for self-employed, which better reflects the actual repayment data.
+
+So the model reduces one clear bias present in the rule system.
+
+SLIDE 13 — The Harder Question
+
+(~70 seconds)
+
+But fairness in lending is complicated.
+
+Even if the model uses employment status in a statistically valid way, that variable can still correlate with deeper social factors like immigration status or economic background.
+
+So even data-driven predictions can produce disparate impact.
+
+There’s another issue too: the model learns from historical decisions. If past loan approvals contained bias, that bias can quietly propagate through the training data.
+
+And finally, there’s the recourse problem.
+
+If a human loan officer denies someone, the applicant can ask questions or request reconsideration.
+
+With automated decisions, that process becomes less obvious.
+
+Because of these concerns, I wouldn’t recommend deploying the model without safeguards.
+
+Regular bias audits, a human review layer for borderline cases, and a transparent appeal process would all be important parts of a responsible deployment.
+
+SLIDE 14 — If This Went Live Tomorrow
+
+(~40 seconds)
+
+Last question: what breaks first if this system goes live?
+
+Most likely model drift.
+
+If economic conditions change — say a recession doubles default rates — the model could become less reliable over time.
+
+Unlike rule-based systems, machine learning models depend heavily on the distribution of the data they were trained on.
+
+So we’d need monitoring on key features, especially things like loan-to-income ratios, to detect shifts early.
+
+The good news is that explainability is already built into the pipeline.
+
+Every prediction generates a clear explanation for regulators and loan reviewers.
+
+So even if the model changes, every decision remains traceable.

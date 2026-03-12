@@ -1,0 +1,127 @@
+% !TEX program = pdflatex
+\documentclass[aspectratio=169, 10pt]{beamer}
+
+% --- Theme ---
+\usetheme{metropolis}
+\metroset{
+  titleformat=regular,
+  sectionpage=progressbar,
+  numbering=fraction,
+  progressbar=frametitle
+}
+
+% --- Packages ---
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{appendixnumberbeamer}
+
+% --- Colors ---
+\definecolor{accent}{HTML}{2563EB}
+\setbeamercolor{frametitle}{bg=accent, fg=white}
+\setbeamercolor{progress bar}{fg=accent}
+\setbeamercolor{title separator}{fg=accent}
+\setbeamercolor{alerted text}{fg=accent}
+
+% --- Graphic path ---
+\graphicspath{{../plots/}}
+
+% --- Title metadata ---
+\title{Predicting Loan Default Risk}
+\subtitle{Data Exploration \& Pipeline Architecture}
+\author{Ranbir Brar}
+\date{}
+\titlegraphic{%
+  \vfill
+  \hfill
+}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+% --- Title Page ---
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ============================================================
+% SECTION 1: Exploratory Data Analysis
+% ============================================================
+\section{Exploratory Data Analysis}
+
+% --- Slide 1: Target Imbalance & Data Scope ---
+\begin{frame}{Target Imbalance \& Data Scope}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item Severe class imbalance in known outcomes
+              (\textasciitilde85\% Repaid, \textasciitilde15\% Defaulted)---addressed via class weighting during model training.
+        \vspace{0.6em}
+        \item Excluded the \textasciitilde8\% of ``ongoing'' applications
+              from training---they lack ground-truth outcomes and
+              are distributed randomly across the applicant pool.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_02_class_distribution.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% --- Slide 2: Missing Data as a Predictive Signal ---
+\begin{frame}{Missing Data as a Predictive Signal}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item 15\% of applications are missing
+              \texttt{documented\_monthly\_income}.
+        \vspace{0.6em}
+        \item Missingness is \alert{not random}; undocumented
+              applicants default at a significantly higher rate.
+        \vspace{0.6em}
+        \item Missing documentation is a risk signal in its own
+              right---not merely a data quality issue.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_01_missingness.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% --- Slide 3: Behavior Signals Over Raw Values ---
+\begin{frame}{Behavior Signals Over Raw Values}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item Applicants whose stated income exceeds documented
+              income by $>2\times$ default at dramatically higher
+              rates---income misrepresentation is a strong risk
+              signal.
+        \vspace{0.6em}
+        \item Default rate jumps from \textasciitilde17\% to
+              \textasciitilde42\% once the loan exceeds 30\% of
+              monthly income.
+        \vspace{0.6em}
+        \item Raw income numbers matter less than how income
+              \textit{relates} to the loan being requested.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_03_income_misrepresentation.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% ============================================================
+\end{document}

@@ -1,1 +1,5 @@
 \beamer@sectionintoc {1}{Exploratory Data Analysis}{2}{0}{1}
+\beamer@sectionintoc {2}{Model Choice}{6}{0}{2}
+\beamer@sectionintoc {3}{Evaluation}{10}{0}{3}
+\beamer@sectionintoc {4}{Fairness \& AI Ethics}{13}{0}{4}
+\beamer@sectionintoc {5}{Production}{15}{0}{5}

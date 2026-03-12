@@ -28,7 +28,7 @@
 
 % --- Title metadata ---
 \title{Predicting Loan Default Risk}
-\subtitle{Data Exploration \& Pipeline Architecture}
+\subtitle{Model Development \& Evaluation}
 \author{Ranbir Brar}
 \date{}
 \titlegraphic{%
@@ -56,12 +56,17 @@
 
     \begin{column}{0.42\textwidth}
       \begin{itemize}
-        \item Severe class imbalance in known outcomes
-              (\textasciitilde85\% Repaid, \textasciitilde15\% Defaulted)---addressed via class weighting during model training.
-        \vspace{0.6em}
-        \item Excluded the \textasciitilde8\% of ``ongoing'' applications
-              from training---they lack ground-truth outcomes and
-              are distributed randomly across the applicant pool.
+        \item Only about 15\% of known outcomes are defaults.
+              With that kind of imbalance, raw accuracy is
+              misleading, so we use F1 and AUC instead.
+        \vspace{0.5em}
+        \item About 8\% of applications are still
+              \texttt{ongoing} with no final label, so they're
+              excluded from training.
+        \vspace{0.5em}
+        \item The chart shows how small the default class is
+              relative to repaid; any model that just predicts
+              ``repaid'' would look 85\% accurate.
       \end{itemize}
     \end{column}
 
@@ -81,11 +86,12 @@
         \item 15\% of applications are missing
               \texttt{documented\_monthly\_income}.
         \vspace{0.6em}
-        \item Missingness is \alert{not random}; undocumented
-              applicants default at a significantly higher rate.
+        \item Missingness is \alert{not random}; applicants
+              without documentation default at a much higher
+              rate.
         \vspace{0.6em}
-        \item Missing documentation is a risk signal in its own
-              right---not merely a data quality issue.
+        \item So missing docs isn't just a data quality
+              problem; it's a genuine risk signal.
       \end{itemize}
     \end{column}
 
@@ -97,22 +103,21 @@
 \end{frame}
 
 % --- Slide 3: Behavior Signals Over Raw Values ---
-\begin{frame}{Behavior Signals Over Raw Values}
+\begin{frame}{Behaviour Signals Over Raw Values}
   \begin{columns}[T]
 
     \begin{column}{0.42\textwidth}
       \begin{itemize}
-        \item Applicants whose stated income exceeds documented
-              income by $>2\times$ default at dramatically higher
-              rates---income misrepresentation is a strong risk
-              signal.
+        \item When stated income is more than $2\times$
+              documented income, default rates spike.
+              Misrepresentation is a strong risk signal.
         \vspace{0.6em}
         \item Default rate jumps from \textasciitilde17\% to
-              \textasciitilde42\% once the loan exceeds 30\% of
-              monthly income.
+              \textasciitilde42\% once the loan is more than
+              30\% of monthly income.
         \vspace{0.6em}
-        \item Raw income numbers matter less than how income
-              \textit{relates} to the loan being requested.
+        \item The raw dollar amount matters less than how
+              the income \textit{relates} to the loan size.
       \end{itemize}
     \end{column}
 
@@ -121,6 +126,209 @@
     \end{column}
 
   \end{columns}
+\end{frame}
+
+% ============================================================
+% SECTION 2: Model Choice
+% ============================================================
+\section{Model Choice}
+
+% --- Slide 4: Why XGBoost? ---
+\begin{frame}{Why XGBoost?}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item Picks up non-linear interactions between
+              features --- logistic regression can't do this.
+        \vspace{0.6em}
+        \item \texttt{scale\_pos\_weight} deals with class
+              imbalance natively, no resampling needed.
+        \vspace{0.6em}
+        \item Threshold tuned for F1 on defaults,
+              not the naive 0.5 cutoff.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_threshold.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% --- Slide 5: What Drives Default Risk? ---
+\begin{frame}{What Drives Default Risk?}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item Gain-based importance pulled straight
+              from the booster.
+        \vspace{0.6em}
+        \item \texttt{loan\_to\_income} and
+              \texttt{withdrawal\_ratio} top the list ---
+              ratios beat raw numbers, same story as EDA.
+        \vspace{0.6em}
+        \item \texttt{has\_documentation} in top 5 ---
+              not having docs is a red flag on its own.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_shap_importance.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% --- Slide 6: Local Explainability ---
+\begin{frame}{Explaining Individual Decisions}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item Global importance $\neq$ why \alert{this}
+              applicant got flagged.
+        \vspace{0.6em}
+        \item Each denial surfaces the top features
+              and actual values for that applicant
+              --- reviewers see the reasoning.
+        \vspace{0.6em}
+        \item Regulator asks why someone was denied?
+              The explainer answers it automatically.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_shap_importance.png}
+      % swap to plot_10_shap_waterfall.png if generated
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% ============================================================
+% SECTION 3: Evaluation
+% ============================================================
+\section{Evaluation}
+
+% --- Slide 7: XGBoost vs. Rule-Based Baseline ---
+\begin{frame}{XGBoost vs.\ Rule-Based Baseline}
+  \begin{columns}[T]
+
+    \begin{column}{0.44\textwidth}
+      \begin{table}
+        \centering
+        \footnotesize
+        \begin{tabular}{@{}lccccc@{}}
+          \toprule
+                    & Rec.   & F1     & AUC    & FPR    & FNR    \\
+          \midrule
+          XGBoost   & 67.0\% & 53.5\% & 70.9\% & 35.1\% & 33.0\% \\
+          Rule      & 33.0\% & 43.1\% & 72.2\% &  8.5\% & 67.0\% \\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+
+      \vspace{0.5em}
+      \alert{XGBoost cuts the missed-default rate (FNR) by half,
+      from 67\% to 33\%.}
+
+      \vspace{0.4em}
+      \footnotesize The rule-based model looks more precise,
+      but only because it barely flags anyone.
+    \end{column}
+
+    \begin{column}{0.53\textwidth}
+      \includegraphics[width=\linewidth]{plot_roc_curves.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% --- Slide 8: The Deploy-Tomorrow Trade-off ---
+\begin{frame}{The Deploy-Tomorrow Trade-off}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item XGBoost catches \textbf{+37} more defaults per
+              368 applications vs.\ the baseline (33\% $\to$ 67\%
+              recall).
+        \vspace{0.5em}
+        \item Trade-off: \textbf{+69} additional good applicants
+              wrongly denied (8.5\% $\to$ 35.1\% FPR).
+        \vspace{0.5em}
+        \item \emph{Who decides?} The founders, weighing the
+              cost of a missed default (full loan loss) against
+              the cost of losing a customer (CAC). The threshold
+              is a dial, not a fixed number.
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_confusion_matrices.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% ============================================================
+% SECTION 4: Fairness & AI Ethics
+% ============================================================
+\section{Fairness \& AI Ethics}
+
+% --- Slide 9: Algorithmic Fairness ---
+\begin{frame}{Algorithmic Fairness \& the Ethics of Automated Decisions}
+  \begin{columns}[T]
+
+    \begin{column}{0.42\textwidth}
+      \begin{itemize}
+        \item The rule-based system penalises self-employed
+              applicants even though their \alert{actual default
+              rates} are similar to employed applicants. That's
+              textbook proxy discrimination.
+        \vspace{0.4em}
+        \item XGBoost learns from outcomes, not labels, so
+              approval rates track real risk instead of
+              employment category.
+        \vspace{0.4em}
+        \item Tension: keeping \texttt{employment\_status}
+              risks disparate-impact liability even if the model
+              uses it correctly. Removing it may increase defaults.
+              \emph{Neither choice is cost-free.}
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.55\textwidth}
+      \includegraphics[width=\linewidth]{plot_fairness.png}
+    \end{column}
+
+  \end{columns}
+\end{frame}
+
+% ============================================================
+% SECTION 5: Production
+% ============================================================
+\section{Production}
+
+% --- Slide 10: If This Went Live Tomorrow... ---
+\begin{frame}{If This Went Live Tomorrow\ldots}
+  \begin{itemize}
+    \item \textbf{Model drift:} a recession doubling default rates
+          would silently degrade predictions. The rule-based system
+          at least degrades \textit{transparently}.
+    \vspace{0.6em}
+    \item \textbf{Distribution monitoring:} feature distributions
+          (e.g., \texttt{loan\_to\_income} under inflation) need
+          to be tracked continuously. The static rule-based system
+          doesn't need any of that.
+    \vspace{0.6em}
+    \item \textbf{Regulatory audits:} covered. The local explainer
+          sits alongside the prediction API and generates
+          human-readable denial reasons per applicant.
+  \end{itemize}
 \end{frame}
 
 % ============================================================

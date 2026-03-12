@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.1.20)  11 MAR 2026 23:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.1.20)  12 MAR 2026 10:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -829,36 +829,127 @@ File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mat
 [2
 
 ]
-<plot_02_class_distribution.png, id=31, 965.5272pt x 298.2342pt>
+<plot_02_class_distribution.png, id=47, 965.5272pt x 298.2342pt>
 File: plot_02_class_distribution.png Graphic file (type png)
 <use plot_02_class_distribution.png>
-Package pdftex.def Info: plot_02_class_distribution.png  used on input line 73.
+Package pdftex.def Info: plot_02_class_distribution.png  used on input line 78.
 (pdftex.def)             Requested size: 219.08743pt x 67.66862pt.
 
 
 [3
 
  <./plot_02_class_distribution.png>]
-<plot_01_missingness.png, id=43, 859.5312pt x 280.4076pt>
+<plot_01_missingness.png, id=60, 859.5312pt x 280.4076pt>
 File: plot_01_missingness.png Graphic file (type png)
 <use plot_01_missingness.png>
-Package pdftex.def Info: plot_01_missingness.png  used on input line 97.
+Package pdftex.def Info: plot_01_missingness.png  used on input line 103.
 (pdftex.def)             Requested size: 219.08743pt x 71.47089pt.
 
 
 [4
 
  <./plot_01_missingness.png>]
-<plot_03_income_misrepresentation.png, id=51, 931.8012pt x 279.9258pt>
+<plot_03_income_misrepresentation.png, id=67, 931.8012pt x 279.9258pt>
 File: plot_03_income_misrepresentation.png Graphic file (type png)
 <use plot_03_income_misrepresentation.png>
-Package pdftex.def Info: plot_03_income_misrepresentation.png  used on input line 124.
+Package pdftex.def Info: plot_03_income_misrepresentation.png  used on input line 129.
 (pdftex.def)             Requested size: 219.08743pt x 65.81674pt.
 
 
 [5
 
  <./plot_03_income_misrepresentation.png>]
+
+[6
+
+]
+<plot_threshold.png, id=82, 642.7212pt x 279.9258pt>
+File: plot_threshold.png Graphic file (type png)
+<use plot_threshold.png>
+Package pdftex.def Info: plot_threshold.png  used on input line 158.
+(pdftex.def)             Requested size: 219.08743pt x 95.41698pt.
+
+
+[7
+
+ <./plot_threshold.png>]
+<plot_shap_importance.png, id=90, 642.7212pt x 424.4658pt>
+File: plot_shap_importance.png Graphic file (type png)
+<use plot_shap_importance.png>
+Package pdftex.def Info: plot_shap_importance.png  used on input line 183.
+(pdftex.def)             Requested size: 219.08743pt x 144.68564pt.
+
+
+[8
+
+ <./plot_shap_importance.png>]
+File: plot_shap_importance.png Graphic file (type png)
+<use plot_shap_importance.png>
+Package pdftex.def Info: plot_shap_importance.png  used on input line 209.
+(pdftex.def)             Requested size: 219.08743pt x 144.68564pt.
+
+
+[9
+
+]
+
+[10
+
+]
+Overfull \hbox (27.49529pt too wide) in paragraph at lines 248--248
+ [] 
+ []
+
+<plot_roc_curves.png, id=109, 348.3414pt x 352.1958pt>
+File: plot_roc_curves.png Graphic file (type png)
+<use plot_roc_curves.png>
+Package pdftex.def Info: plot_roc_curves.png  used on input line 248.
+(pdftex.def)             Requested size: 211.11896pt x 213.458pt.
+
+Overfull \vbox (19.52045pt too high) detected at line 248
+ []
+
+
+
+[11
+
+ <./plot_roc_curves.png>]
+<plot_confusion_matrices.png, id=117, 767.0256pt x 286.1892pt>
+File: plot_confusion_matrices.png Graphic file (type png)
+<use plot_confusion_matrices.png>
+Package pdftex.def Info: plot_confusion_matrices.png  used on input line 275.
+(pdftex.def)             Requested size: 219.08743pt x 81.7438pt.
+
+
+[12
+
+ <./plot_confusion_matrices.png>]
+
+[13
+
+]
+<plot_fairness.png, id=132, 932.283pt x 357.4956pt>
+File: plot_fairness.png Graphic file (type png)
+<use plot_fairness.png>
+Package pdftex.def Info: plot_fairness.png  used on input line 309.
+(pdftex.def)             Requested size: 219.08743pt x 84.01147pt.
+
+Overfull \vbox (37.27974pt too high) detected at line 309
+ []
+
+
+
+[14
+
+ <./plot_fairness.png>]
+
+[15
+
+]
+
+[16
+
+]
 \tf@nav=\write6
 \openout6 = `slidedeck.nav'.
 
@@ -874,20 +965,20 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `slidedeck.out' has not changed.
-(rerunfilecheck)             Checksum: 63C38F30A8FD31C496054D6059B29B07;174.
+(rerunfilecheck)             Checksum: 228F71353C9CF8B2956BE34FC92600E3;621.
  ) 
 Here is how much of TeX's memory you used:
- 25444 strings out of 473529
- 516312 string characters out of 5714773
- 863714 words of memory out of 5000000
- 48138 multiletter control sequences out of 15000+600000
- 571036 words of font info for 62 fonts, out of 8000000 for 9000
+ 25575 strings out of 473529
+ 518323 string characters out of 5714773
+ 864633 words of memory out of 5000000
+ 48235 multiletter control sequences out of 15000+600000
+ 577216 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,13n,123p,1911b,756s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0700.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1440.pk><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on slidedeck.pdf (5 pages, 251458 bytes).
+ <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0700.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcss1000.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1200.pk> <C:\Users\brarr\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1440.pk><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/brarr/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on slidedeck.pdf (16 pages, 578353 bytes).
 PDF statistics:
- 256 PDF objects out of 1000 (max. 8388607)
- 12 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 495 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

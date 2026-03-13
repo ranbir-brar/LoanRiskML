@@ -2,9 +2,10 @@
 __pycache__/
 *.pyc
 
-# Ignore Manim and generated slide files (except slides.pdf which we kept in root)
+# Ignore Manim and generated slide files
 media/
 slides/
+slides.pdf
 
 # Ignore custom data and slide generation scripts per request
 src/

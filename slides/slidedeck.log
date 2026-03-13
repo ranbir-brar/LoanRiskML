@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.1.20)  12 MAR 2026 11:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2026.1.20)  13 MAR 2026 02:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -993,7 +993,7 @@ Package rerunfilecheck Info: File `slidedeck.out' has not changed.
 Here is how much of TeX's memory you used:
  25609 strings out of 473529
  518953 string characters out of 5714773
- 865633 words of memory out of 5000000
+ 865632 words of memory out of 5000000
  48259 multiletter control sequences out of 15000+600000
  578805 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191

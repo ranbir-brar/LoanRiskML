@@ -1,0 +1,14 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Manim and generated slide files (except slides.pdf which we kept in root)
+media/
+slides/
+
+# Ignore custom data and slide generation scripts per request
+src/
+script.txt
+
+# Ignore unrelated assessment instructions
+Take-Home ML.pdf

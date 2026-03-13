@@ -3,3 +3,7 @@ numpy
 matplotlib
 seaborn
 shap
+xgboost
+scikit-learn
+manim
+manim-slides

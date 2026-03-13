@@ -17,15 +17,6 @@ requirements.txt # python dependencies
 
 ---
 
-# Predicting Loan Default Risk
-
-**Bree Recruitment — Machine Learning Take-Home Exercise**
-
-- **Loom Presentation:** [Insert Link Here]
-- **Author:** Ranbir Brar
-
----
-
 ## How To Run This
 
 Install dependencies:

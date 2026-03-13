@@ -8,11 +8,10 @@ data/
 loan_applications.csv # synthetic dataset generated from the provided script
 
 notebooks/
-eda.ipynb # data exploration + understanding the dataset
-model.ipynb # feature engineering, model training, evaluation
-plot\_\*.png # plots generated during analysis
+eda.ipynb data exploration + understanding the dataset
+model.ipynb feature engineering, model training, evaluation
+plot\_\*.png plots generated during analysis
 
-slides.pdf # slides used for the Loom walkthrough
 
 requirements.txt # python dependencies
 
